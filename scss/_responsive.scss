@@ -1,0 +1,90 @@
+/* === responsive === */
+
+@media (max-width: 1200px) {
+
+  .latest-posts {
+    article {
+      height: 300px;
+      margin-bottom: 15px;
+      @include normal-prefixes(border-radius, 8px);
+
+      .latest-content h3 {
+        font-size: 30px;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0px;
+      }
+
+    }
+
+  }
+
+}
+
+
+@media (max-width: 992px) {
+
+  .articles {
+
+    article {
+
+      &:first-of-type { margin-top: 25px !important }
+      &:last-of-type { margin-bottom: 25px !important }
+
+    }
+
+
+
+
+  }
+
+}
+
+@media (max-width: 786px) {
+
+  .page-desktop-ad {
+    display: none;
+  }
+
+}
+
+@media (min-width: 786px) {
+
+  .page-mobile-ad {
+    display: none;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+
+  .ad {
+    display: none !important;
+  }
+
+  .articles {
+
+    article {
+
+      &:first-of-type { margin-top: 25px !important }
+      &:last-of-type { margin-bottom: 25px !important }
+
+    }
+
+
+
+
+  }
+
+}
+
+@media (min-width: 480px) {
+
+  .mobile-ad {
+    display: none;
+  }
+
+}
+

@@ -1,0 +1,108 @@
+
+/* ======= [latest-posts] ======= */
+
+.latest-posts {
+  overflow: hidden;
+  margin: 30px 0;
+  padding: 0;
+  @include normal-prefixes(border-radius, 8px);
+
+  article {
+    height: 260px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+
+    .front {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      z-index: 4;
+      background: center/cover;
+    }
+
+    // ============== [ hover effects ] ==============
+
+    .close {
+
+      @include normal-prefixes(transition, .7s ease);
+     -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .fadeOut {
+
+      @include normal-prefixes(transition, .3s ease);
+
+    }
+
+    .latest-content {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      color: $lightext;
+      z-index: 3;
+      padding: 4px 22px 29px 15px;
+      .small-category {
+        margin: 10px 0px;
+
+        a {
+          padding: 6px 12px;
+          border-radius: 4px;
+          color: $lightext;
+          background: $special;
+          font-weight: 600;
+        }
+
+      }
+
+      h3 {
+        font-size: 14.5px;
+        line-height: 1.65em;
+        color: $lightext;
+      }
+
+    }
+
+    &:first-of-type {
+      height: 520px;
+      //float: right;
+
+      .latest-content h3 { font-size: 30px; }
+    }
+
+    &:last-of-type {
+      .latest-content h3 { font-size: 30px; }
+    }
+
+    &:before {
+      content: '';
+      background: rgba(#000, 0.4);
+      width: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      z-index: 2;
+    }
+
+    &:hover .close, &:active .close, &:focus .close {
+      -webkit-clip-path: polygon(0 0, 100% 100%, 100% 100%, 100% 100%);
+      clip-path: polygon(0 0, 100% 100%, 100% 100%, 100% 100%);
+      background-position: right top;
+
+    }
+
+    &:hover .fadeOut, &:active .fadeOut, &:focus .fadeOut {
+      transform: scale(1.5);
+      opacity: 0.1;
+      z-index: 2;
+    }
+
+  }
+
+}

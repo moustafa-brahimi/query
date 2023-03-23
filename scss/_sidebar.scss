@@ -1,0 +1,430 @@
+/* =========== [ The SideBar ] =========== */
+
+
+.sidebar {
+
+  color: $text;
+  margin: 30px 0;
+  padding: 0 0 0 30px;
+
+  a { color: $special; }
+
+  .item {
+
+    background: $secondary;
+    @include normal-prefixes(border-radius, 5px);
+    padding: 30px;
+    margin-bottom: 30px;
+
+    &.ad {
+      padding: 30px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      
+      .item-title {
+        padding: 0 30px;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+    }
+
+    .item-title {
+
+      font-size: 14px;
+      position: relative;
+      margin: 3px 5px 20px 5px;
+      @extend %flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      &::after {
+
+        content: '';
+        display: inline-block;
+        height: 2px;
+        flex-grow: 1;
+        background: $special;
+        margin: 0 0 0 15px;
+
+      }
+
+    }
+
+  }
+
+  .author {
+
+    .item-content {
+
+      color: $lightext;
+      font-weight: bold;
+      min-height: 240px;
+      @include normal-prefixes( border-radius, 3px );
+      font-size: 14px;
+      text-align: center;
+      padding: 8px;
+      @extend %flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      line-height: 2em;
+      background:  $special;
+
+      .description {
+
+        z-index: 2;
+
+        img {
+          @include normal-prefixes( box-sizing, content-box );
+          @include normal-prefixes( border-radius, 50% );
+          margin: 0 0 10px 0;
+        }
+
+        a {
+          color: $secondary;
+        }
+
+      }
+
+    }
+
+  }
+
+  .categories, .tags {
+
+    ul {
+
+      list-style: none;
+      text-align: center;
+      line-height: 30px;
+
+      li {
+        display: inline-block;
+        margin: 0 10px;
+        font-weight: bold;
+
+        a { color : $special }
+      }
+
+    }
+
+  }
+
+  .comment-form {
+
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 2em;
+
+    .comment-notes {
+      margin-bottom: 20px;
+    }
+
+    %inputs {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0;
+      border: none;
+      @include normal-prefixes( border-radius, 3px );
+      @include normal-prefixes( transition, .4s ease );
+      background: $lightext
+    }
+
+    textarea {
+      resize: none;
+      min-height: 200px;
+      @extend %inputs;
+
+      &:focus {
+        box-shadow: 0px 0px 5px lighten( $black,60% );
+        outline: none;
+      }
+
+    }
+
+    input {
+      @extend %inputs;
+
+      &:focus {
+        box-shadow: 0px 0px 5px lighten( $black,60% );
+        outline: none;
+      }
+
+    }
+
+    .submit {
+      background: $special;
+      color: $lightext;
+      margin: 5px 0 0 0;
+    }
+
+  }
+
+  .comments {
+
+    ul, ol { list-style: none }
+
+    .commentlist {
+
+      .comment-body {
+        margin: 15px 0;
+        font-family: verdana, tahoma;
+        color: $text;
+        line-height: 2.1em;
+        background: $secondary;
+        padding: 12px 15px;
+        filter: brightness(.96);
+        @include normal-prefixes( border-radius, 4px );
+        overflow: hidden;
+        font-size: 12px;
+
+        .vcard {
+          margin: 0 0 10px 0;
+          color: $special;
+          font-size: 0;
+          @extend %flex;
+          align-items: center;
+          column-gap: 10px;
+          font-family: 'Alexandria';
+        }
+
+
+        .avatar {
+          @include normal-prefixes( border-radius, 50% );
+        }
+
+        .fn {
+          font-weight: bold;
+          font-family: 'Alexandria';
+          color: $special;
+          font-style: normal;
+          font-size: 12px;
+        }
+
+        .comment-meta a {
+          color: $text;
+          font-family: 'Alexandria';
+          font-weight: bold;
+          font-size: 10px;
+        }
+
+        dd {
+          padding-left: 15px;
+          border-left: 1px solid rgba(0,0,0,.1);
+        }
+
+        dt {
+          margin-top: 15px;
+        }
+
+        ul, ol {
+          list-style: disc; 
+          padding: 5px 5px 5px 20px;
+          li {
+            padding: 0;
+            font-weight: 400;
+          }
+        }
+
+        ol {
+          list-style: decimal;
+        }
+
+        * {
+          margin: 5px 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+          margin: 15px 0 5px;
+        }
+
+        img {
+          display: block;
+          border-radius: 4px;
+        }
+
+      }
+
+      .children {
+
+        margin-left: 10px;
+
+        .commentmetadata {  display: none   }
+
+        .comment {
+          padding: 10px 0;
+        }
+
+        .comment-body { 
+          margin: 0;
+        }
+
+        .vcard {  margin: 0  }
+
+
+      }
+
+    }
+
+    .go-to-form {
+      font-weight: bold;
+      background: none;
+      border: 0
+    }
+
+  }
+
+  // ======================================
+
+  .searchform {
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 0;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      color: $special;
+    }
+
+  }
+
+  .calendar_wrap {
+
+    #wp-calendar {
+
+      width: 100%;
+      text-align: center;
+
+    }
+
+    thead {
+
+      line-height: 46px;
+      color: $text;
+      text-align: center;
+
+    }
+
+    tbody {
+
+      line-height: 34px;
+      background: $darkback;
+      color: $lightext;
+      font-weight: bold;
+      font-size: 13px;
+      position: relative;
+      border-bottom: 2px solid $special;
+
+    }
+
+    td {
+
+      padding: 5px;
+      @include normal-prefixes( transition, all .4s ease );
+
+      &:hover { background: $special }
+
+    }
+
+     #prev {
+
+        padding: 12px 10px 12px 16px;
+        background: $special;
+        font-weight: bold;
+        font-size: 12px;
+        border-radius: 0 0 4px 4px;
+        border-top: 2px solid $secondary;
+
+        a  { color: $lightext }
+
+     }
+
+     #today {
+       background: $special
+     }
+
+     caption { display: none }
+
+  }
+
+  .cats-list {
+    @extend %flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .cat-item {
+      display: inline-block;
+      margin: 0 10px;
+      border-bottom: 2px solid;
+      text-align: center;
+      flex-grow: 1;
+      font-size: 12px;
+      @include normal-prefixes( transition, all 0.5s ease );
+
+
+      &:hover {
+
+        color: $special;
+
+      }
+
+    }
+
+  }
+
+  .recentcomments {
+
+    .comment-author-link {
+      filter: opacity(.7);
+      font-size: 12px;
+      display: block;
+    }
+
+  }
+
+  .tagcloud {
+
+    .tag-cloud-link {
+
+      font-size: 12px !important;
+      font-weight: bold;
+      padding: 13px;
+      text-align: right;
+      line-height: 36px;
+
+    }
+
+  }
+
+  // =========================== components
+
+  ul {
+
+    list-style: none;
+    line-height: 2em;
+
+    li {
+      padding: 18px 0;
+      font-weight: bold;
+      font-size: 13px;
+      &:hover a { color: $special }
+      a {
+        color: var(--font-color);
+        @include normal-prefixes( transition, all 0.5s ease );
+        &:hover { color: $special }
+
+      }
+
+    }
+
+  }
+
+}

@@ -1,0 +1,33 @@
+/* ======== [ author-page-card ] ======= */
+
+.author-page-card {
+
+  text-align: center;
+  color: #424242;
+  line-height: 2.5em;
+  background: $secondary;
+  margin: 30px 0;
+  @include normal-prefixes( border-radius, 6px );
+
+  .avatar {
+    margin: 30px 0;
+    @include normal-prefixes( border-radius, 6px );
+  }
+
+  .informations-side {
+    margin: 0 auto 30px auto;
+    float: none;
+
+    h3 {
+      font-size: 28px;
+      margin: 0 0 15px;
+    }
+
+    p {
+      font-family: verdana, tahoma;
+      font-size: 15px;
+    }
+
+  }
+
+}
