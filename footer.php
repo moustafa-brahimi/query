@@ -62,7 +62,7 @@
 
           <?php if( $description_activation ): ?>
 
-            <p> <?php echo bloginfo('description'); ?> </p>
+            <p> <?php echo esc_html(bloginfo('description')); ?> </p>
 
 
           <?php endif; ?>
@@ -81,11 +81,7 @@
 
       <footer class="col-xs-12">
 
-
-
-        <p> <?php echo $copyrights; ?> </p>
-
-
+        <p> <?php echo esc_html($copyrights); ?> </p>
 
       </footer>
 

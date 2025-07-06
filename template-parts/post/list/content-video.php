@@ -1,7 +1,8 @@
 <?php $class  = get_query_var( "with-sidebar", 'col-md-10' ) ?>
 
 
-<article id="post-<?php echo get_the_ID(); ?>" <?php post_class(" query-home-post list query-video " . $class . " col-xs-12 "); ?> data-id='<?php  echo get_the_ID(); ?>' data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ) ?>">
+<article id="post-<?php echo get_the_ID(); ?>" <?php post_class(" query-home-post list query-video " . $class . " col-xs-12 "); ?> data-id='<?php  echo get_the_ID(); ?>' data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ) ?>">
+
 
   <div class="video">
 
@@ -28,7 +29,7 @@
     </div><!-- .cmp-title -->
 
     <div class="cmp-excerpt">
-
+query_get_words
       <?php echo get_words ( get_the_excerpt(),  20 ) . ' ...'; ?>
 
     </div><!-- .cmp-excerpt -->
@@ -38,8 +39,12 @@
 
   </div><!-- .content-components -->
 
-
-
-</article>
 
-<!-- article -->
+
+
+
+</article>
+
+
+<!-- article -->
+

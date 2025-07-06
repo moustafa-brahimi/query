@@ -1,16 +1,27 @@
 <?php $class  = get_query_var( "with-sidebar", 'col-md-4' ) ?>
 
-<article id="post-<?php echo get_the_ID(); ?>" <?php post_class(" query-home-post masonry " . $class . " col-xs-12 "); ?> data-id='<?php  echo get_the_ID(); ?>' data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ) ?>">
-
-  <div class="title" title="<?php the_title(); ?>">
-
-    <a href="<?php the_permalink(); ?>">
-
-      <h3><?php the_title(); ?></h3>
-
-    </a>
-
-  </div><!-- .title -->
+<article id="post-<?php echo get_the_ID(); ?>" <?php post_class(" query-home-post masonry " . $class . " col-xs-12 "); ?> data-id='<?php  echo get_the_ID(); ?>' data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ) ?>">
+
+
+
+  <div class="title" title="<?php the_title(); ?>">
+
+
+
+    <a href="<?php the_permalink(); ?>">
+
+
+
+      <h3><?php the_title(); ?></h3>
+
+
+
+    </a>
+
+
+
+  </div><!-- .title -->
+
 
 
 
@@ -21,8 +32,10 @@
   <?php $i = 0; ?>
 
 
-  <?php if( !empty( $attachments ) ): ?>
-
+  <?php if( !empty( $attachments ) ): ?>
+
+
+
     <div class="gallery">
 
 
@@ -105,28 +118,44 @@
 
     </div><!-- .gallery -->
 
-
-  <?php else: ?>
-
-    <div class="excerpt">
-
-      <?php echo mb_strimwidth( get_the_excerpt(), 0, 175, '...' ); ?>
-
-      <a href="<?php the_permalink() ?>">
 
-        <?php $readmore =  get_theme_mod( 'query_readmore',  __( 'read more', 'query' ) ); ?>
-
-        <?php echo $readmore; ?>
-
-      </a>
-
-    </div>
-
-  <?php endif; ?>
-
+
+  <?php else: ?>
+
+
+
+    <div class="excerpt">
+
+
+
+      <?php echo mb_strimwidth( get_the_excerpt(), 0, 175, '...' ); ?>
+
+
+
+      <a href="<?php the_permalink() ?>">
+
+        <?php $readmore =  esc_html( get_theme_mod('query_readmore',  __( 'read more', 'query' )) ); ?>
+        <?php echo $readmore; ?>
+
+      </a>
+
+
+
+    </div>
+
+
+
+  <?php endif; ?>
+
+
+
   <?php get_template_part( 'template-parts/post/info' ); ?>
-
-
-</article>
 
-<!-- article -->
+
+
+
+</article>
+
+
+<!-- article -->
+

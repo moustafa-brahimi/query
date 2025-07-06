@@ -1,46 +1,23 @@
 
 
 <!DOCTYPE html>
-
-
-
 <html <?php language_attributes() ?>>
 
-
-
-  <head>
-
-
-
+ <head>
     <meta charset="<?php bloginfo("charset"); ?>">
-
-
-
     <meta name="descripiton" content="<?php bloginfo('description'); ?>">
-
     <meta name="viewport" content="width=device-width, initial-scale=0.65">
-
-
     <meta name="profile" href="https://gmpg.org/xfn/11">
-
-
-
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
-
-
-
-
     <?php wp_head(); ?>
-
-
-
   </head>
 
 
 
   <body <?php body_class(); ?>>
-
     <?php wp_body_open(); ?>
+    
+    <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'query' ); ?></a>
 
     <div class="container">
 

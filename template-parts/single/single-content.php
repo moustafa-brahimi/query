@@ -9,49 +9,6 @@
 
 <?php $class = ( $post_author || $post_categories || $post_comments || $post_tags ? 'col-md-8' : 'col-md-12' ); ?>
 
-<!-- [ AD ] -->
-
-<?php $single_post_ad_code = get_theme_mod( 'single_post_ad', false ); ?>
-
-<?php if( isset( $single_post_ad_code ) && is_string( $single_post_ad_code ) && strlen( $single_post_ad_code ) > 0 ): ?>
-
-
-  <div class="page-ad page-desktop-ad ad col-xs-12">
-
-	<label class="ad-label">
-	  <?php _e( 'ad', 'query' ); ?>
-	</label>
-
-	<div class="ad-content ">
-	  <?php echo $single_post_ad_code; ?>
-	</div>
-
-  </div>
-
-<?php endif; ?>
-
-
-	<?php $single_post_mobile_ad_code = get_theme_mod( 'single_post_mobile_ad', false ); ?>
-
-	<?php if( isset( $single_post_mobile_ad_code ) && is_string( $single_post_mobile_ad_code ) && strlen( $single_post_mobile_ad_code ) > 0 ): ?>
-
-
-	<div class="page-ad page-mobile-ad col-xs-12">
-
-		<label class="ad-label">
-		<?php _e( 'mobile ad', 'query' ); ?>
-		</label>
-
-		<div class="ad-content ">
-		<?php echo $single_post_mobile_ad_code; ?>
-		</div>
-
-	</div>
-
-	<?php endif; ?>
-
-<!-- [ AD ] -->
-
 <article <?php post_class( "query-single-post col-xs-12 " . $class  ); ?>>
 
     <h2><?php the_title(); ?></h2>

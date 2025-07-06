@@ -31,7 +31,7 @@
     <div class="thumbnail" data-image=''>
 
 
-      <?php the_post_thumbnail( 'wide-thum' ); ?>
+      <?php the_post_thumbnail( 'quey-wide-thum' ); ?>
 
       <i class="fas fa-heart middle-heart fa-6x"></i>
 
@@ -57,7 +57,7 @@
 
         <?php $readmore =  get_theme_mod( 'query_readmore',  __( 'read more', 'query' ) ); ?>
 
-        <?php echo ( empty_content( get_the_content() ) ? __( 'visit post', 'query' )  : $readmore ); ?>
+        <?php echo esc_html( query_empty_content( get_the_content() ) ? __( 'visit post', 'query' )  : $readmore ); ?>
 
 
       </a>

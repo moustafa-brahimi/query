@@ -1,40 +1,14 @@
 jQuery(document).ready(function ($) {
 
-
-
-
     console.log("hello developer");
 
-
-
-
-
-    var content     =   $(".buttonsDisplayer").html(),
-
-
-
-
-
+    let content     =   $(".buttonsDisplayer").html(),
         style       =   $(".buttonsDisplayer").siblings(".sharer").css("marginTop"),
-
-
-
-
-
         listHeight  =   $('.the-list .menu').height(),
-
-
-
         comments    =   $("#all-comments"),
-
-
         btn         =   $( '.info .love:not(.loving)' ),
-
         savedSearchs=   [],
-
-
         bestTime,  clicks,  placeholder, menuClicks, loadMore, pageId, postID, that, animationDuration,loveBtn,
-
         searchInput, textVal, searchKey, results, lovesNum, authorLink, thePost, searchItem;
 
 
@@ -59,12 +33,7 @@ jQuery(document).ready(function ($) {
 
     $( ".menu-item-has-children" ).each( function () {
 
-
-
       $( this ).children( "a" ).attr( { href: "#" } );
-
-
-
       $( this ).on( "click", function() {
 
 
@@ -301,7 +270,7 @@ jQuery(document).ready(function ($) {
 
     $( ".the-list #s" ).on( "blur", function() {
 
-      $( ".results" ).slideUp();
+      // $( ".results" ).slideUp();
 
     });
 

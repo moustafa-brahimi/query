@@ -422,7 +422,258 @@ function add_customize_section( $wp_customize ) {
 		'priority'	=> 	20,
 		'settings'	=> 'font_color'
 	);
+
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'font_color_control', $font_color_args ) );
+
+
+
+
+	/* ============ [ Ads ] ============= */
+
+	/**
+	 * Sanitize ad code HTML content
+	 * Allows HTML and scripts needed for ad codes while still providing security
+	 *
+	 * @param string $input The ad code to sanitize.
+	 * @return string Sanitized ad code.
+	 */
+	function query_sanitize_ad_code( $input ) {
+		// Get the allowed HTML for wp_kses_post
+		$allowed_html = wp_kses_allowed_html( 'post' );
+		
+		// Add additional tags needed for ads
+		$allowed_html['script'] = array(
+			'async' => true,
+			'charset' => true,
+			'defer' => true,
+			'src' => true,
+			'id' => true,
+			'type' => true
+		);
+		$allowed_html['iframe'] = array(
+			'src' => true,
+			'width' => true,
+			'height' => true,
+			'frameborder' => true,
+			'scrolling' => true,
+			'id' => true,
+			'class' => true,
+			'style' => true,
+			'marginwidth' => true,
+			'marginheight' => true,
+			'allowfullscreen' => true,
+			'allow' => true
+		);
+		
+		return wp_kses( $input, $allowed_html );
+	}
+
+
+	$args	=	array( 	
+		'title'			=>		__( 'Ads', 'query' ),
+		'priority'		=> 		220,
+   		'description'	=> 		__( 'add ads around the website', 'query' )
+	);
+
+
+	$wp_customize->add_section( 'query-ads', $args );
+
+	
+	/* ========================= */
+
+	$wp_customize->add_setting( 'homepage_top_ad', array(
+		'sanitize_callback' => 'query_sanitize_ad_code',
+	));
+
+	$homepage_top_ad	=	array( 	
+		
+		'label'		=>	__( 'Homepage top ad code', 'query' ),
+		'description' => __( 'Recommended ( 728 X 90 )', 'query' ),
+		'section'	=>	'query-ads',
+		'settings'	=>	'homepage_top_ad',
+		'type'		=>	'textarea'
+	
+	);
+
+	$wp_customize->add_control( 'homepage-top-ad', $homepage_top_ad );
+
+
+	$wp_customize->add_setting( 'homepage_top_mobile_ad', array(
+		'sanitize_callback' => 'query_sanitize_ad_code',
+	));
+
+	$homepage_top_mobile_ad_args	=	array( 	
+		'label'			=>	__( 'homepage top mobile ad code', 'query' ),
+		'description' 	=> __( 'Recommended ( 300 X 250 )', 'query' ),
+		'section'		=>	'query-ads',
+		'settings'		=>	'homepage_top_mobile_ad',
+		'type'			=>	'textarea'
+	);
+
+	$wp_customize->add_control( 'homepage-top-mobile-ad', $homepage_top_mobile_ad_args );
+
+
+
+	$wp_customize->add_setting( 'homepage_bottom_ad', array(
+		'sanitize_callback' => 'query_sanitize_ad_code',
+	));
+
+	$homepage_bottom_ad	=	array( 	
+		
+		'label'			=>	__( 'Homepage bottom ad code', 'query' ),
+		'description'	=> __( 'Recommended ( 728 X 90 )', 'query' ),
+		'section'		=>	'query-ads',
+		'settings'		=>	'homepage_bottom_ad',
+		'type'			=>	'textarea'
+	
+	);
+
+	$wp_customize->add_control( 'homepage-bottom-ad', $homepage_bottom_ad );
+
+
+
+	$wp_customize->add_setting( 'homepage_bottom_mobile_ad', array(
+		'sanitize_callback' => 'query_sanitize_ad_code',
+	));
+
+	$homepage_bottom_mobile_ad_args	=	array( 	
+		
+		'label'			=>	__( 'homepage bottom mobile ad code', 'query' ),
+		'description' 	=> __( 'Recommended ( 300 X 250 )', 'query' ),
+		'section'		=>	'query-ads',
+		'settings'		=>	'homepage_bottom_mobile_ad',
+		'type'			=>	'textarea'
+	
+	);
+
+	$wp_customize->add_control( 'homepage-bottom-mobile-ad', $homepage_bottom_mobile_ad_args );
+
+	
+	/* ========================= */
+
+		$wp_customize->add_setting( 'single_post_ad', array(
+		'sanitize_callback' => 'query_sanitize_ad_code',
+	));
+
+	$single_post_ad_args	=	array( 	
+		'label'			=>	__( 'Single post page ad code', 'query' ),
+		'description' 	=> __( 'Recommended ( 728 X 90 )', 'query' ),
+		'section'		=>	'query-ads',
+		'settings'		=>	'single_post_ad',
+		'type'			=>	'textarea'
+	);
+
+	$wp_customize->add_control( 'single-post-ad', $single_post_ad_args );
+
+	$wp_customize->add_setting( 'single_post_mobile_ad', array(
+		'sanitize_callback' => 'query_sanitize_ad_code',
+	));
+
+	$single_post_mobile_ad_args	=	array( 	
+		
+		'label'			=>	__( 'Single post page mobile ad code', 'query' ),
+		'description' 	=> __( 'Recommended ( 300 X 250 )', 'query' ),
+		'section'		=>	'query-ads',
+		'settings'		=>	'single_post_mobile_ad',
+		'type'			=>	'textarea'
+	
+	);
+	$wp_customize->add_control( 'single-post-mobile-ad', $single_post_mobile_ad_args );
+
+
+	$wp_customize->add_setting( 'single_post_sidebar_ad', array(
+		'sanitize_callback' => 'query_sanitize_ad_code',
+	));
+
+
+	$single_post_ad_args	=	array( 	
+		'label'			=>	__( 'Single post page sidebar ad code', 'query' ),
+		'description' 	=> __( 'Recommended ( 300 X 250 )', 'query' ),
+		'section'		=>	'query-ads',
+		'settings'		=>	'single_post_sidebar_ad',
+		'type'			=>	'textarea'
+	);
+
+	$wp_customize->add_control( 'single-post-sidebar-ad', $single_post_ad_args );
+
+	$wp_customize->add_setting( 'single_post_sidebar_mobile_ad', array(
+		'sanitize_callback' => 'query_sanitize_ad_code',
+	));
+
+	$single_post_sidebar_mobile_ad_args	=	array( 	
+		'label'			=>	__( 'Single post page sidebar mobile ad code', 'query' ),
+		'description' 	=> __( 'Recommended ( 300 X 250 )', 'query' ),
+		'section'		=>	'query-ads',
+		'settings'		=>	'single_post_sidebar_mobile_ad',
+		'type'			=>	'textarea'
+	);
+
+	$wp_customize->add_control( 'single-post-sidebar-mobile-ad', $single_post_sidebar_mobile_ad_args );
+
+
+
+
+	
+	/* ========================= */
+
+		$wp_customize->add_setting( 'archive_page_top_ad', array(
+		'sanitize_callback' => 'query_sanitize_ad_code',
+	));
+
+	$archive_page_top_ad_args	=	array( 	
+		'label'			=>	__( 'Archive page top ad code', 'query' ),
+		'description' 	=> __( 'Recommended ( 728 X 90 )', 'query' ),
+		'section'		=>	'query-ads',
+		'settings'		=>	'archive_page_top_ad',
+		'type'			=>	'textarea'
+	);
+	$wp_customize->add_control( 'archive-top-ad', $archive_page_top_ad_args );
+
+
+	$wp_customize->add_setting( 'archive_page_top_mobile_ad', array(
+		'sanitize_callback' => 'query_sanitize_ad_code',
+	));
+
+	$archive_page_top_mobile_ad_args	=	array( 	
+		'label'			=>	__( 'Archive page top mobile ad code', 'query' ),
+		'description' => __( 'Recommended ( 300 X 250 )', 'query' ),
+		'section'	=>	'query-ads',
+		'settings'	=>	'archive_page_top_mobile_ad',
+		'type'		=>	'textarea'
+	);
+	$wp_customize->add_control( 'archive-page-top-mobile-ad', $archive_page_top_mobile_ad_args );
+
+	
+	$wp_customize->add_setting( 'archive_page_bottom_ad', array(
+		'sanitize_callback' => 'query_sanitize_ad_code',
+	));
+
+	$archive_page_bottom_ad_args	=	array( 	
+		
+		'label'		=>	__( 'Archive page bottom ad code', 'query' ),
+		'description' => __( 'Recommended ( 728 X 90 )', 'query' ),
+		'section'	=>	'query-ads',
+		'settings'	=>	'archive_page_bottom_ad',
+		'type'		=>	'textarea'
+	
+	);
+	$wp_customize->add_control( 'archive-bottom-ad', $archive_page_bottom_ad_args );
+
+
+	$wp_customize->add_setting( 'archive_page_bottom_mobile_ad', array(
+		'sanitize_callback' => 'query_sanitize_ad_code',
+	));
+
+	$archive_page_bottom_mobile_ad_args	=	array( 	
+		
+		'label'		=>	__( 'Archive page bottom mobile ad code', 'query' ),
+		'description' => __( 'Recommended ( 300 X 250 )', 'query' ),
+		'section'	=>	'query-ads',
+		'settings'	=>	'archive_page_bottom_mobile_ad',
+		'type'		=>	'textarea'
+	
+	);
+	$wp_customize->add_control( 'archive-page-bottom-mobile-ad', $archive_page_bottom_mobile_ad_args );
 
 	// ===================================== //
 

@@ -1,5 +1,5 @@
 
-<div class="latest-posts col-xs-12" id="latest-posts">
+<div class="query-latest-posts col-xs-12" id="query-latest-posts">
 
     <?php $latestposts_style  =  get_theme_mod( 'query_latestposts_style', 'close' ); ?>
 
@@ -62,11 +62,11 @@
           
           switch( $i ):
 
-              case 1: $thumbnail_size = "slider-big-post"; break;
+              case 1: $thumbnail_size = "query-slider-big-post"; break;
 
-              case 4: $thumbnail_size = "wide-thum"; break;
+              case 4: $thumbnail_size = "quey-wide-thum"; break;
               
-              default: $thumbnail_size = "slider-small-post"; break;
+              default: $thumbnail_size = "query-slider-small-post"; break;
 
           endswitch; ?>
 
@@ -152,12 +152,13 @@
           <!-- article -->
 
 
-        <?php wp_reset_postdata(); ?>
-
-      <?php endwhile; ?>
+          <?php wp_reset_postdata(); ?>
+          
+          <?php endwhile; ?>
+          
 
     <?php endif; ?>
 
 
 </div>
-<!-- .latest-posts -->
+<!-- .query-latest-posts -->

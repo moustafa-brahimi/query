@@ -3,7 +3,7 @@
 
 //  check if content is empty
 
-function empty_content($str) {
+function query_empty_content($str) {
 	return trim(str_replace('&nbsp;','',strip_tags($str))) == '';
 }
 
@@ -15,41 +15,28 @@ function query_enqueue_scripts() {
 
 
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.css', array(), '3.7.7' );
-
-
-
 	wp_enqueue_style( 'query-style', get_template_directory_uri() . '/css/style.css' , array(), "2.0", "all" );
-
 
 	if( is_rtl() ) {
 		wp_enqueue_style( "query-rtl", get_template_directory_uri() . '/css/rtl.css' , array(), "2.0", "all" );
 	}
-
-
-
 
 	wp_enqueue_script( "query-js", get_template_directory_uri() . "/js/script.min.js", array( "jquery", "jquery-effects-core" ), '2.0', true );
 
 
 	// ========== set post content css prop
 
-	$post_font_size 		= 	get_theme_mod( "post_font_size", 16 );
-
-	$post_font_family		=		get_theme_mod( "post_font_family", 'Verdana, tahoma' );
-
-	$post_font_weight		=		get_theme_mod( "post_font_weight", 'regular' );
-
-	$post_content_prop 	=		array( 	'font' 		=> 	$post_font_family,
-
-																	'size'		=> 	$post_font_size,
-
-																	'weight'	=> 	$post_font_weight );
+	$post_font_size		= 	get_theme_mod( "post_font_size", 16 );
+	$post_font_family	=	get_theme_mod( "post_font_family", 'Verdana, tahoma' );
+	$post_font_weight	=	get_theme_mod( "post_font_weight", 'regular' );
+	$post_content_prop 	=	array( 	'font' 	 =>	$post_font_family,
+									'size'	 =>	$post_font_size,
+									'weight' =>	$post_font_weight );
 
 	wp_localize_script( "query-js", "postcontent", $post_content_prop );
 
 // ===
 
-	
 	$special	=	get_theme_mod( 'special_color', '#E74C3C' );
 	$primary	=	get_theme_mod( 'primary_color', "#FFFFFF" );
 	$secondary	=	get_theme_mod( 'secondary_color', '#EEEEEE' );
@@ -68,56 +55,28 @@ function query_enqueue_scripts() {
 // ===
 
 	wp_localize_script( 'query-js', 'ajax', array( 'url'	=> admin_url( 'admin-ajax.php' ), 'noposts'	=> __( " there's no more posts ", "query" ) ) );
-
 	wp_enqueue_script( "bootstrap-js", get_template_directory_uri() . "/js/bootstrap.js", array( "jquery" ), '3.7.7', true );
-
 	wp_enqueue_script( "awesomefont-all", get_template_directory_uri() . "/js/fontawesome-all.min.js", array( "jquery" ), '5.0.10', true );
-
-	wp_enqueue_script( "jquery" );
-
-
 }
-
-
 
 add_action("wp_enqueue_scripts", 'query_enqueue_scripts');
 
 
-
-
-
-
 function query_register_menu() {
 
-
-
 	get_theme_support("menus");
-
-
-
 	register_nav_menu("navtop", __( "the navbar", "query" ) );
-
-
 
 }
 
-
-
 add_action("init", "query_register_menu");
 
-
-
 function query_theme_supports( ) {
-
 	
 	add_theme_support( 'post-formats', array( 'video', 'gallery', 'status', 'audio', 'image' ) );
-
 	add_theme_support( 'custom-logo' );
-
 	add_theme_support( "title-tag" );
-
 	add_theme_support( "automatic-feed-links" );
-
 	add_theme_support( 'post-thumbnails' );
 
     add_theme_support(
@@ -136,118 +95,53 @@ function query_theme_supports( ) {
 
 }
 
-
-
 add_action( "after_setup_theme", "query_theme_supports" );
 
 
 
 // set excerpt read symbole
 
-
-
-function wpdocs_excerpt_more( $more ) {
-
+function query_excerpt_more( $more ) {
     return ' ... ';
-
 }
 
-
-
-add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
-
-
-
+add_filter( 'excerpt_more', 'query_excerpt_more' );
 
 // seo =============
 
 
 
-function opengraph() {
+function query_opengraph() {
 
+	global $post;
 
-
-		global $post;
-
-
-
-    if( is_single() ):
-
-
-
+	if( is_single() ):
         if( has_post_thumbnail( $post->ID ) ) {
+			$img_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
+			$img_src = ( is_array( $img_src ) && !empty( $img_src ) ? array_shift( $img_src ) : false );
+		} else {
+			$custom_logo_id = get_theme_mod( 'custom_logo' );
+			$img_src = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+			$img_src = ( is_array( $img_src ) && !empty( $img_src ) ? array_shift( $img_src ) : false );
+		}
 
+		if( $excerpt = $post->post_excerpt ) {
+			$excerpt = strip_tags($post->post_excerpt);
+			$excerpt = str_replace("", "'", $excerpt);
+		} else {
+			$excerpt = get_bloginfo('description');
 
-
-				$img_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
-				$img_src = ( is_array( $img_src ) && !empty( $img_src ) ? array_shift( $img_src ) : false );
-
-
-
-			  } else {
-
-
-
-				$custom_logo_id = get_theme_mod( 'custom_logo' );
-
-				$img_src = wp_get_attachment_image_src( $custom_logo_id , 'full' );
-				$img_src = ( is_array( $img_src ) && !empty( $img_src ) ? array_shift( $img_src ) : false );
-
-
-
-
-
-				}
-
-
-
-			  if( $excerpt = $post->post_excerpt ) {
-
-
-
-			      $excerpt = strip_tags($post->post_excerpt);
-
-
-						$excerpt = str_replace("", "'", $excerpt);
-
-
-
-			  } else {
-
-
-
-			      $excerpt = get_bloginfo('description');
-
-
-
-			  } ?>
+		} ?>
 
 
 
     <meta property="og:title" content="<?php echo the_title(); ?>"/>
 
-
-
 		<meta property="og:description" content="<?php echo $excerpt; ?>"/>
-
-
-
 		<meta property="og:type" content="article"/>
-
-
-
 		<meta property="og:url" content="<?php echo the_permalink(); ?>"/>
-
-
-
 		<meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
-
-
-
 		<meta property="og:image" content="<?php echo $img_src; ?>"/>
-
-
-
 <?php endif;
 
 
@@ -255,21 +149,17 @@ function opengraph() {
 }
 
 
-add_action('wp_head', 'opengraph', 5);
+add_action('wp_head', 'query_opengraph', 5);
 
 
 // edit title
 
 function query_title_edit( $title ) {
-
+	
 	if( is_single() & is_home() ):
-
 		$output = get_bloginfo('name') . " " . $title;
-
 	else:
-
 		$output = $title;
-
 	endif;
 
 	return $output;
@@ -296,6 +186,55 @@ function query_load_textdomain() {
 }
 
 add_action( "after_setup_theme", "query_load_textdomain" );
+
+/**
+ * Ensure skip link focus for keyboard accessibility
+ */
+
+ /**
+ * Fix skip link focus in IE11.
+ *
+ * This does not enqueue the script because it is tiny and because it is only for IE11,
+ * thus it does not warrant having an entire dedicated blocking script being loaded.
+ *
+ * @link https://git.io/vWdr2
+ */
+
+function query_skip_link_focus_fix() {
+    // Add JavaScript to handle the skip link focus
+    echo "<script>
+        ( function() {
+            var isWebkit = navigator.userAgent.toLowerCase().indexOf( 'webkit' ) > -1,
+                isOpera  = navigator.userAgent.toLowerCase().indexOf( 'opera' ) > -1,
+                isIe     = navigator.userAgent.toLowerCase().indexOf( 'msie' ) > -1;
+
+            if ( ( isWebkit || isOpera || isIe ) && document.getElementById && window.addEventListener ) {
+                window.addEventListener( 'hashchange', function() {
+                    var id = location.hash.substring( 1 ),
+                        element;
+
+                    if ( ! ( /^[A-z0-9_-]+$/.test( id ) ) ) {
+                        return;
+                    }
+
+                    element = document.getElementById( id );
+
+                    if ( element ) {
+                        if ( ! ( /^(?:a|select|input|button|textarea)$/i.test( element.tagName ) ) ) {
+                            element.tabIndex = -1;
+                        }
+
+                        element.focus();
+                    }
+                }, false );
+            }
+        } )();
+    </script>";
+}
+add_action( 'wp_print_footer_scripts', 'query_skip_link_focus_fix' );
+
+
+
 
 add_action( "wp_ajax_load_new_posts", 'query_posts_load' );
 
@@ -336,7 +275,7 @@ function query_posts_load( ) {
 
 	 	get_template_part( 'template-parts/post/'. $home_style . '/content', get_post_format() );
 
-
+		wp_reset_postdata();
 
  		endwhile;
 
@@ -351,13 +290,13 @@ function query_posts_load( ) {
 
 function query_custom_thumbnail_size() {
 
-	add_image_size( 'wide-thum', 895, 300, true );
+	add_image_size( 'quey-wide-thum', 895, 300, true );
 
-	add_image_size( 'slider-big-post', 570, 520, true );
+	add_image_size( 'query-slider-big-post', 570, 520, true );
 
-	add_image_size( 'slider-wide-post', 570, 260, true );
+	add_image_size( 'query-slider-wide-post', 570, 260, true );
 
-	add_image_size( 'slider-small-post', 285, 260, true );
+	add_image_size( 'query-slider-small-post', 285, 260, true );
 
 }
 
@@ -415,7 +354,7 @@ function query_love_post_button() {
 }
 
 
-function get_words( $sentence, $count = 110 ) {
+function query_get_words( $sentence, $count = 110 ) {
 
 	$imploded	=	explode( ' ', $sentence );
 
@@ -431,21 +370,16 @@ function get_words( $sentence, $count = 110 ) {
 
 function query_side_bar() {
 
-	$args	=	array( 	'name'					=> 	__( 'the side bar', "query" ),
-
-									'id'						=> 	"query-sidebar",
-
-									'Description'		=> 	'the left sidebar',
-
-									'class'					=> 	'qr-sidebar',
-
-									'before_widget'	=> 	'<div class="item col-xs-12">',
-
-									'after_widget'	=> 	'</div>',
-
-									'before_title'	=> 	'<h3 class="item-title">',
-
-									'after_title'		=> 	"</h3>" );
+	$args	=	array( 	
+		
+		'name'			=> 	__( 'the side bar', "query" ),
+		'id'			=> 	"query-sidebar",
+		'Description'	=>'the left sidebar',
+		'class'			=> 	'qr-sidebar',
+		'before_widget'	=> 	'<div class="item col-xs-12">',
+		'after_widget'	=> 	'</div>',
+		'before_title'	=> 	'<h3 class="item-title">',
+		'after_title'	=> 	"</h3>" );
 
 	register_sidebar( $args );
 
@@ -454,39 +388,29 @@ function query_side_bar() {
 add_action( "widgets_init", "query_side_bar" );
 
 
-//  ==================== [ social media menu ]
+//  ==================== [ social media menu ] ==========================
 
 function query_social_media_menu() {
-
 	register_nav_menu( "query-social-media", __( 'social media menu', 'query' ) );
-
 }
 
 add_action( "init", "query_social_media_menu" );
 
 
-//  ==================== [ search ajax ]
-
-add_action( "wp_ajax_nav_search", "query_search_results" );
-
-add_action( "wp_ajax_nopriv_nav_search", "query_search_results" );
+//  ==================== [ search ajax ] ==========================
 
 
 function query_search_results() {
 
-
 	ob_clean();
 
-
 	$results	=	[];
-
 	$keyword	=	wp_strip_all_tags( $_POST['keyword'] );
 	$args 		= 	array( 'posts_per_page'	=>  get_option( 'posts_per_page', 10 ), "post_status" => "publish", "s"	=> $keyword );
 	$posts		=	new WP_QUERY( $args );
 
 
 		if( $posts->have_posts() ):
-
 			while( $posts->have_posts() ):
 
 				$posts->the_post();
@@ -512,5 +436,6 @@ function query_search_results() {
 
 }
 
-
+add_action( "wp_ajax_nav_search", "query_search_results" );
+add_action( "wp_ajax_nopriv_nav_search", "query_search_results" );
 
