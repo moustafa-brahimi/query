@@ -50,7 +50,8 @@ The homepage slider displays your recent posts with featured images. You can con
 ## Changelog
 
 
-**1.6.4**
+
+**1.6.5**
 
 * Fixed set_query_var() usage - replaced with get_template_part() with $args parameter for better WordPress compliance
 * Removed OpenGraph functionality (moved to plugin territory as per WordPress guidelines)
@@ -63,6 +64,10 @@ The homepage slider displays your recent posts with featured images. You can con
 * Code cleanup and WordPress coding standards compliance
 * Removed unwanted .bak files from theme directory
 
+
+**1.6.4**
+
+fixes esc issues, reducing textarea fields
 
 **1.6.3**
 
