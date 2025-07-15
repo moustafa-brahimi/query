@@ -1,7 +1,7 @@
-<?php $class  = get_query_var( "with-sidebar", 'col-md-10' ) ?>
+<?php $class = isset($args['with-sidebar']) ? $args['with-sidebar'] : 'col-md-10'; ?>
 
 
-<article id="post-<?php echo get_the_ID(); ?>" <?php post_class(" query-home-post list query-gallery ". $class ." col-xs-12"); ?> data-id='<?php  echo get_the_ID(); ?>'>
+<article id="post-<?php echo get_the_ID(); ?>" <?php post_class(" query-home-post list query-gallery ". esc_attr( $class ) ." col-xs-12"); ?> data-id='<?php echo get_the_ID(); ?>'>
 
 
 
@@ -42,15 +42,9 @@
 
 
 
-          <?php $active = ($i == 0 ? "active" : ""); ?>
+          <?php $active = ($i == 0 ? "active" : ""); ?>          <div class="item <?php echo esc_attr( $active ); ?>">
 
-
-
-          <div class="item <?php echo $active; ?>">
-
-
-
-            <div class="image" style="background-image:url('<?php echo $src[0]; ?>')">
+            <div class="image" style="background-image:url('<?php echo esc_url( $src[0] ); ?>')">>
 
 
 
@@ -111,11 +105,9 @@ query_get_words
 
         </a>
 
-      </div><!-- .cmp-title -->
+      </div><!-- .cmp-title -->      <div class="cmp-excerpt">
 
-      <div class="cmp-excerpt">
-
-        <?php echo get_words ( get_the_excerpt(),  20 ) . ' ...'; ?>
+        <?php echo query_get_words( get_the_excerpt(), 20 ) . ' ...'; ?>
 
       </div><!-- .cmp-excerpt -->
 

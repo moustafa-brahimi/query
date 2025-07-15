@@ -40,17 +40,9 @@
 
       <?php if( $post_author ): ?>
 
-        <div class="item author col-xs-12">
+        <div class="item author col-xs-12">          <h3 class="item-title">
 
-
-
-          <h3 class="item-title">
-
-
-
-            <?php echo get_the_author_meta( "display_name" ); ?>
-
-
+            <?php echo esc_html( get_the_author_meta( "display_name" ) ); ?>
 
           </h3> <!-- .item-title -->
 
@@ -86,7 +78,7 @@
               <?php if( !empty( get_the_author_meta( "description" ) ) ): ?>
 
 
-                <?php echo get_the_author_meta("description"); ?>
+                <?php echo esc_html( get_the_author_meta("description") ); ?>
 
 
               <?php else: ?>
@@ -96,7 +88,7 @@
 
                   <a href="<?php echo get_edit_user_link( $id ) . "#description"; ?>">
 
-                    <?php _e( "Add Description", "query" ); ?>
+                    <?php esc_html_e( "Add Description", "query" ); ?>
 
                   </a>
 
@@ -124,11 +116,9 @@
         <div class="item ad col-xs-12">
 
           <h3 class="item-title">
-            <?php _e( 'ad', 'query' ); ?>
-          </h3> <!-- .item-title -->
-
-          <div class="item-content ">
-            <?php echo $ad_code; ?>
+            <?php esc_html_e( 'ad', 'query' ); ?>
+          </h3> <!-- .item-title -->          <div class="item-content ">
+            <?php echo wp_kses_post( $ad_code ); ?>
           </div><!-- .item-content -->
 
           </div><!-- .item -->
@@ -142,11 +132,9 @@
         <div class="item mobile-ad col-xs-12">
 
           <h3 class="item-title">
-            <?php _e( 'mobile ad', 'query' ); ?>
-          </h3> <!-- .item-title -->
-
-          <div class="item-content ">
-            <?php echo $mobile_ad_code; ?>
+            <?php esc_html_e( 'mobile ad', 'query' ); ?>
+          </h3> <!-- .item-title -->          <div class="item-content ">
+            <?php echo wp_kses_post( $mobile_ad_code ); ?>
           </div><!-- .item-content -->
 
           </div><!-- .item -->
@@ -165,7 +153,7 @@
 
 
 
-            <?php _e( "categories", "query" ); ?>
+            <?php esc_html_e( "categories", "query" ); ?>
 
 
 
@@ -305,7 +293,7 @@
 
 
 
-                <?php @comments_template(); ?>
+                <?php comments_template(); ?>
 
 
 
@@ -349,7 +337,7 @@
 
           <h3 class="item-title">
 
-            <?php _e( "tags", "query" ); ?>
+            <?php esc_html_e( "tags", "query" ); ?>
 
           </h3> <!-- .item-title -->
 
@@ -359,11 +347,9 @@
 
               <?php foreach ($tags as $tag): ?>
 
-                <li>
+                <li>                  <a href="<?php echo esc_url( get_tag_link( $tag->term_id ) ); ?>">
 
-                  <a href="<?php echo get_tag_link( $tag->term_id ); ?>">
-
-                    <?php echo $tag->name; ?>
+                    <?php echo esc_html( $tag->name ); ?>
 
                   </a>
 

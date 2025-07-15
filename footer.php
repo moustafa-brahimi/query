@@ -28,19 +28,11 @@
               <?php if( !empty( $social_media_menu_items ) ): ?>
 
 
-              <?php foreach ( $social_media_menu_items as $item ): ?>
+              <?php foreach ( $social_media_menu_items as $item ): ?>                  <a target="_blank" href="<?php echo esc_url( $item->url ); ?>">
 
+                    <div class="social-bt" title="<?php echo esc_attr( $item->post_title ); ?>">
 
-
-
-                  <a target="_blank" href="<?php echo $item->url; ?>">
-
-                    <div class="social-bt" title=" <?php echo $item->post_title; ?> ">
-
-
-
-
-                        <i class="fab fa-<?php echo $item->post_title; ?> i fa-sm fa-fw"></i>
+                        <i class="fab fa-<?php echo esc_attr( $item->post_title ); ?> i fa-sm fa-fw"></i>
 
 
 

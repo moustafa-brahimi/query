@@ -1,6 +1,6 @@
-<?php $class  = get_query_var( "with-sidebar", 'col-md-10' ) ?>
+<?php $class = isset($args['with-sidebar']) ? $args['with-sidebar'] : 'col-md-10'; ?>
 
-<article id="post-<?php echo get_the_ID(); ?>" <?php post_class(" query-home-post list query-audio " . $class . " col-xs-12 "); ?> data-id='<?php  echo get_the_ID(); ?>' data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ) ?>">
+<article id="post-<?php echo get_the_ID(); ?>" <?php post_class(" query-home-post list query-audio " . esc_attr( $class ) . " col-xs-12 "); ?> data-id='<?php echo get_the_ID(); ?>' data-ajax-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
 
 
   <div class="audio">
@@ -25,11 +25,8 @@
 
       </a>
 
-    </div><!-- .cmp-title -->
-
-    <div class="cmp-excerpt">
-query_get_words
-      <?php echo get_words ( get_the_excerpt(),  20 ) . ' ...'; ?>
+    </div><!-- .cmp-title -->    <div class="cmp-excerpt">
+      <?php echo query_get_words( get_the_excerpt(), 20 ) . ' ...'; ?>
 
     </div><!-- .cmp-excerpt -->
 

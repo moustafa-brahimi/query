@@ -54,7 +54,13 @@ function query_enqueue_scripts() {
 
 // ===
 
-	wp_localize_script( 'query-js', 'ajax', array( 'url'	=> admin_url( 'admin-ajax.php' ), 'noposts'	=> __( " there's no more posts ", "query" ) ) );
+	wp_localize_script( 'query-js', 'ajax', array( 
+		'url'	=> admin_url( 'admin-ajax.php' ), 
+		'noposts'	=> __( " there's no more posts ", "query" ),
+		'load_posts_nonce' => wp_create_nonce( 'query_load_posts' ),
+		'love_post_nonce' => wp_create_nonce( 'query_love_post' ),
+		'search_nonce' => wp_create_nonce( 'query_search' )
+	) );
 	wp_enqueue_script( "bootstrap-js", get_template_directory_uri() . "/js/bootstrap.js", array( "jquery" ), '3.7.7', true );
 	wp_enqueue_script( "awesomefont-all", get_template_directory_uri() . "/js/fontawesome-all.min.js", array( "jquery" ), '5.0.10', true );
 }
@@ -106,51 +112,6 @@ function query_excerpt_more( $more ) {
 }
 
 add_filter( 'excerpt_more', 'query_excerpt_more' );
-
-// seo =============
-
-
-
-function query_opengraph() {
-
-	global $post;
-
-	if( is_single() ):
-        if( has_post_thumbnail( $post->ID ) ) {
-			$img_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
-			$img_src = ( is_array( $img_src ) && !empty( $img_src ) ? array_shift( $img_src ) : false );
-		} else {
-			$custom_logo_id = get_theme_mod( 'custom_logo' );
-			$img_src = wp_get_attachment_image_src( $custom_logo_id , 'full' );
-			$img_src = ( is_array( $img_src ) && !empty( $img_src ) ? array_shift( $img_src ) : false );
-		}
-
-		if( $excerpt = $post->post_excerpt ) {
-			$excerpt = strip_tags($post->post_excerpt);
-			$excerpt = str_replace("", "'", $excerpt);
-		} else {
-			$excerpt = get_bloginfo('description');
-
-		} ?>
-
-
-
-    <meta property="og:title" content="<?php echo the_title(); ?>"/>
-
-		<meta property="og:description" content="<?php echo $excerpt; ?>"/>
-		<meta property="og:type" content="article"/>
-		<meta property="og:url" content="<?php echo the_permalink(); ?>"/>
-		<meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
-		<meta property="og:image" content="<?php echo $img_src; ?>"/>
-<?php endif;
-
-
-
-}
-
-
-add_action('wp_head', 'query_opengraph', 5);
-
 
 // edit title
 
@@ -242,9 +203,14 @@ add_action( "wp_ajax_nopriv_load_new_posts", 'query_posts_load' );
 
 function query_posts_load( ) {
 
+	// Verify nonce for security
+	if ( ! wp_verify_nonce( $_POST['nonce'], 'query_load_posts' ) ) {
+		wp_die( 'Security check failed' );
+	}
+
 	ob_clean();
 
-	$id				=	$_POST['pageId'] + 1;
+	$id				=	absint( $_POST['pageId'] ) + 1;
 
 	$args 		= array( 	'paged'					 	=> $id,
 
@@ -264,24 +230,19 @@ function query_posts_load( ) {
 
   $class  = ( $home_style == "masonry" ? $masonary_class : $default_class );
 
-  set_query_var( 'with-sidebar', $class );
-
-
 	if( $post->have_posts() ):
 
 		while( $post->have_posts() ):
 
 		$post->the_post();
 
-	 	get_template_part( 'template-parts/post/'. $home_style . '/content', get_post_format() );
-
-		wp_reset_postdata();
+	 	get_template_part( 'template-parts/post/'. $home_style . '/content', get_post_format(), array( 'with-sidebar' => $class ) );
 
  		endwhile;
 
+		wp_reset_postdata();
+
 	endif;
-
-
 
 	die();
 
@@ -312,6 +273,11 @@ add_action( 'wp_ajax_nopriv_love_post_button', "query_love_post_button" );
 
 
 function query_love_post_button() {
+
+	// Verify nonce for security
+	if ( ! wp_verify_nonce( $_POST['nonce'], 'query_love_post' ) ) {
+		wp_die( 'Security check failed' );
+	}
 
 	ob_clean();
 
@@ -402,10 +368,15 @@ add_action( "init", "query_social_media_menu" );
 
 function query_search_results() {
 
+	// Verify nonce for security
+	if ( ! wp_verify_nonce( $_POST['nonce'], 'query_search' ) ) {
+		wp_die( 'Security check failed' );
+	}
+
 	ob_clean();
 
 	$results	=	[];
-	$keyword	=	wp_strip_all_tags( $_POST['keyword'] );
+	$keyword	=	sanitize_text_field( $_POST['keyword'] );
 	$args 		= 	array( 'posts_per_page'	=>  get_option( 'posts_per_page', 10 ), "post_status" => "publish", "s"	=> $keyword );
 	$posts		=	new WP_QUERY( $args );
 
@@ -427,6 +398,8 @@ function query_search_results() {
 
 
 			endwhile;
+
+			wp_reset_postdata();
 
 		endif;
 

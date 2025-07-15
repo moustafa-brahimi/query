@@ -1,5 +1,6 @@
-=== Query ===
-Contributors: brahimimustapha
+# Query
+
+Contributors: brahimi mustapha
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 7.0
@@ -9,7 +10,7 @@ Tags: custom-colors, one-column, blog, rtl-language-support, custom-logo, access
 
 Query is an Arabic WordPress Theme For Personal Blogs with modern design and excellent readability.
 
-== Description ==
+## Description
 Query is a clean and modern WordPress theme specially designed for Arabic personal blogs. The theme focuses on content readability and provides a beautiful browsing experience for your readers.
 
 Features:
@@ -26,60 +27,64 @@ Features:
 
 Manual: https://github.com/brahimi-mustapha/query/blob/main/manual.pdf
 
-== Installation ==
+## Installation 
 
 1. Upload the theme files to the `/wp-content/themes/query` directory, or install the theme through the WordPress themes screen directly.
 2. Activate the theme through the 'Themes' screen in WordPress.
 3. Use the Appearance -> Customize menu to configure theme options.
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions
 
-= How do I change the theme colors? =
+### How do I change the theme colors?
 
 You can change the theme colors from the WordPress Customizer under Appearance > Customize > Colors.
 
-= Does this theme support RTL languages? =
+### Does this theme support RTL languages?
 
 Yes, Query has full support for RTL languages, especially Arabic.
 
-= How do I set up the homepage slider? =
+### How do I set up the homepage slider?
 
 The homepage slider displays your recent posts with featured images. You can configure it from the WordPress Customizer under Appearance > Customize > Latest Posts.
 
-== Changelog ==
+## Changelog
 
-= 1.6.2 =
+
+**1.6.4**
+
+fixes esc issues, reducing textarea fields
+
+
+**1.6.3**
+
+improve keyboard navigation and solve accessbility issues
+
+**1.6.2**
+* This update adds accessibility improvements including a skip link for keyboard navigation and fixes content ID issues across template files.
 * Added skip link for improved accessibility
 * Fixed content ID issues across template files
 * Updated theme to work with WordPress 6.0
 
-= 1.6.1 =
+**1.6.1**
 * Improved RTL support
 * Fixed mobile menu display issues
 * Enhanced search functionality
 
-= 1.6.0 =
+**1.6.0**
 * Added new post display styles (masonry, list)
 * Improved responsive design
 * Added social media menu
 
-= 1.5.0 =
+**1.5.0**
 * Added support for custom logo
 * Enhanced customizer options
 * Fixed pagination issues
 
-= 1.0.0 =
-* Initial release
+**1.0.0**
 
-== Upgrade Notice ==
+**Initial release**
 
-= 1.6.2 =
-This update adds accessibility improvements including a skip link for keyboard navigation and fixes content ID issues across template files.
-
-= 1.6.3 =
-improve keyboard navigation and solve accessbility issues
-
-== Third-Party Resources ==
+### Third-Party Resources
 
 1. **Bootstrap**
    - Version: 3.7.7
@@ -105,3 +110,9 @@ improve keyboard navigation and solve accessbility issues
 
 5. **Images**
    - Images (separ.png, background.png, background-404.gif): Designed by theme author
+   - Pictures Used in the screenshot
+      -  https://openverse.org/image/bf3ef685-77a4-4386-977f-5d3166307e04?q=animal&p=7
+      -  https://openverse.org/image/45f8373f-17d3-4d74-95dd-7e2facf3de61?q=laptop&p=53
+      -  https://openverse.org/image/8ac10702-509e-4a62-8b9f-8c24aa16b4c3?q=sport&p=56
+      -  https://openverse.org/image/c214cdd4-b5a6-40f5-9d1b-883b6e386095?q=clock&p=3
+      - Licenses : https://creativecommons.org/share-your-work/cclicenses/

@@ -84,11 +84,7 @@
 
 
 
-          <?php $i++; ?>
-
-
-
-          <article id="<?php echo $id; ?>" <?php post_class("item " . $class . " col-xs-12"); ?> style="background-image:url('<?php echo $url; ?>');">
+          <?php $i++; ?>          <article id="<?php echo esc_attr( 'post-' . get_the_ID() ); ?>" <?php post_class("item " . $class . " col-xs-12"); ?> style="background-image:url('<?php echo esc_url( $url ); ?>');">
 
 
             <div class="latest-content">
@@ -102,11 +98,11 @@
 
 
 
-                <a href="<?php echo get_category_link($post_category->cat_ID); ?>">
+                <a href="<?php echo esc_url( get_category_link($post_category->cat_ID) ); ?>">
 
 
 
-                  <?php echo $post_category->cat_name; ?>
+                  <?php echo esc_html( $post_category->cat_name ); ?>
 
 
 
@@ -143,7 +139,7 @@
             </div>
 
 
-            <div class="front <?php echo $latestposts_style; ?>" style="background-image:url('<?php echo $url; ?>');"></div>
+            <div class="front <?php echo esc_attr( $latestposts_style ); ?>" style="background-image:url('<?php echo esc_url( $url ); ?>');"></div>
 
 
           </article>
@@ -152,9 +148,9 @@
           <!-- article -->
 
 
-          <?php wp_reset_postdata(); ?>
-          
           <?php endwhile; ?>
+
+          <?php wp_reset_postdata(); ?>
           
 
     <?php endif; ?>

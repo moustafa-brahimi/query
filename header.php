@@ -40,14 +40,9 @@
 
 
 
-            <?php elseif( $logo_actv ): ?>
+            <?php elseif( $logo_actv ): ?>              <a href="<?php echo esc_url( home_url() ); ?>">
 
-
-              <a href="<?php echo esc_attr( home_url() ); ?>">
-
-
-                <h3 class="no-logo"> <?php echo bloginfo( 'name' ); ?> </h3>
-
+                <h3 class="no-logo"> <?php echo esc_html( get_bloginfo( 'name' ) ); ?> </h3>
 
               </a>
 
@@ -108,7 +103,7 @@
               <?php echo get_search_form(); ?>
 
 
-              <button class="show-more" id="show-more"><?php _e( 'Show More', 'query' ); ?></button>
+              <button class="show-more" id="show-more"><?php esc_html_e( 'Show More', 'query' ); ?></button>
 
 
             </div>

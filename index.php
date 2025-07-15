@@ -29,18 +29,13 @@
 
     <?php $articles_class   = ( $sidebar == true ? 'col-md-8 with-sidebar' : 'col-md-12' ); ?>
 
-    <?php $masonary_class   = ( $sidebar == true ? 'col-md-6 with-sidebar' : 'col-md-4' ); ?>
+    <?php $masonary_class   = ( $sidebar == true ? 'col-md-6 with-sidebar' : 'col-md-4' ); ?>    <?php $class  = ( $home_style == "masonry" ? $masonary_class : $default_class ); ?>
 
-    <?php $class  = ( $home_style == "masonry" ? $masonary_class : $default_class ); ?>
-
-    <?php set_query_var( 'with-sidebar', $class ); ?>
-
-    <div class="articles col-xs-12 <?php printf( "%s %s", $articles_class, $home_style ); ?>">
+    <div class="articles col-xs-12 <?php printf( "%s %s", esc_attr( $articles_class ), esc_attr( $home_style ) ); ?>">
 
       <?php 
 
         $loved_posts =( isset( $_COOKIE[ 'loved_posts' ] ) ? json_decode( stripslashes($_COOKIE[ 'loved_posts' ]) ) : [] );
-        set_query_var( "loves", $loved_posts ); 
 
       ?>
 
@@ -54,7 +49,7 @@
 
           <?php $id = "post-" . get_the_ID(); ?>
 
-          <?php	get_template_part( "template-parts/post/" . $home_style . "/content", get_post_format() ); ?>
+          <?php	get_template_part( "template-parts/post/" . $home_style . "/content", get_post_format(), array( 'with-sidebar' => $class, 'loves' => $loved_posts ) ); ?>
 
 
 
