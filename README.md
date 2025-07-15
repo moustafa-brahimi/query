@@ -52,7 +52,16 @@ The homepage slider displays your recent posts with featured images. You can con
 
 **1.6.4**
 
-fixes esc issues, reducing textarea fields
+* Fixed set_query_var() usage - replaced with get_template_part() with $args parameter for better WordPress compliance
+* Removed OpenGraph functionality (moved to plugin territory as per WordPress guidelines)
+* Fixed wp_reset_postdata() placement - moved after endwhile loops for proper query restoration
+* Enhanced security with proper data escaping using esc_attr(), esc_url(), esc_html(), and wp_kses_post()
+* Removed all error suppression operators (@) for better error handling and debugging
+* Added nonce verification to AJAX functions for improved security
+* Improved input sanitization with absint() and sanitize_text_field()
+* Enhanced translation function calls using esc_html_e() instead of _e()
+* Code cleanup and WordPress coding standards compliance
+* Removed unwanted .bak files from theme directory
 
 
 **1.6.3**
