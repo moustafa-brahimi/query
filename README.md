@@ -49,7 +49,17 @@ The homepage slider displays your recent posts with featured images. You can con
 
 ## Changelog
 
+**1.6.6**
 
+* Added new comments.php template with enhanced accessibility features
+* Improved Bootstrap styling for comment form elements
+* Added proper comment threading and navigation
+* Updated theme compatibility with WordPress 6.8
+* Fixed comment form field validation and labeling
+* Enhanced security with proper escaping in comment templates
+* Added GDPR-compliant cookie consent checkbox styling
+* Improved screen reader text for comment navigation
+* Optimized comment display on mobile devices
 
 **1.6.5**
 
